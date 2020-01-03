@@ -21,12 +21,10 @@ int main(int argc, char const *argv[])
 	char * newLine;
 	printf("New Line: ");
 	fgets(newLine, 1024, stdin);
-	int fd = open("story.txt", O_WRONLY | O_APPEND, 0644) ;
+	shmdt(line);
+	int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644) ;
 	write(fd, newLine, 1024);
 	close(fd);
-
-	strcpy(line, newLine);
-	shmdt(line);
 	sb.sem_op = 1;
 	semop(semid, &sb, 1);
 
