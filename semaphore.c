@@ -16,13 +16,16 @@ int main(int argc, char const *argv[])
 			printf("%i",errno);
 			return 1;
 	}
-	char * line = shmat(shmid,0,0);
+	int * line = shmat(shmid,0,0);
 	printf("Last Line: %s\n", line);
+	char * newLine;
 	printf("New Line: ");
-	fgets(line, 1024, stdin);
-	int fd = open("story.txt", O_WRONLY | O_APPEND, 0644) ;
-	write(fd, line, 1024);
+	fgets(newLine, 1024, stdin);
+	int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644) ;
+	write(fd, newLine, 1024);
 	close(fd);
+
+	strcpy(line, newLine);
 	shmdt(line);
 	sb.sem_op = 1;
 	semop(semid, &sb, 1);
