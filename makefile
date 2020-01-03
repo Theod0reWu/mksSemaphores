@@ -11,7 +11,7 @@ all: main.o semaphore.o
 main.o: main.c main.h
 	$(CC) -c  main.c
 
-shell.o: semaphore.c main.h
+semaphore.o: semaphore.c main.h
 	$(CC) -c  semaphore.c
 
 run:
