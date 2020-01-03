@@ -9,11 +9,12 @@ int main(int argc, char const *argv[])
 	else if (strcmp(argv[1], "-c") == 0){
 		printf("Creating shared memory\n");
 		int shmid;
-		shmid = shmget(SHM_KEY, 128 * sizeof(char), IPC_CREAT | 0644);
+		shmid = shmget(SHM_KEY, sizeof(char) * 128, IPC_EXCL | IPC_CREAT | 0644);
 		printf("shmid: %i\n", shmid);
 		if (shmid == -1){
 			printf("Well that didn't work. uh oh\n");
-			perror("shared memory");
+			printf(strerror(errno));
+			printf("%i",errno);
 			return 1;
 		}
 		printf("Creating the semaphore\n");
