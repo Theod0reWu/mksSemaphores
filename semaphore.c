@@ -23,8 +23,9 @@ int main(int argc, char const *argv[])
 	fgets(newLine, 1024, stdin);
 	strcpy(line, newLine);
 	shmdt(line);
+	//printf("%s\n", newLine);
 	int fd = open("story.txt",  O_WRONLY | O_APPEND, 0644) ;
-	write(fd, newLine, 1024);
+	write(fd, newLine, sizeof(char)*strlen(newLine));
 	close(fd);
 	sb.sem_op = 1;
 	semop(semid, &sb, 1);

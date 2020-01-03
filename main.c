@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 		}
 		printf("Creating the semaphore\n");
 		int semid = semget(SEM_KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
-		printf("semid: %i\n", semid);		
+		printf("semid: %i\n", semid);
 		if (semid == -1){
 			semid = semget(SEM_KEY, 1, 0);
 		}
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 
 
     printf("Creating the file\n");
-    int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
+    int fd = open("story.txt", O_CREAT, 0644);
     if (fd == -1) {
       printf("Error: %s\n", strerror(errno));
       return -1 ;
@@ -67,12 +67,14 @@ int main(int argc, char const *argv[])
     else{
       printf("unable to delete file\n");
     }
+		close(fd);
 	}
 	else if (strcmp(argv[1], "-v") == 0){
     int fd = open("story.txt", O_RDONLY);
     char story[1024];
-    read(fd, story, 20479) ;
-    printf("Here is the story:\n%s\n", story);
+    read(fd, story, sizeof(char)*512) ;
+    printf("Here is the story:    \n%s  \n", story);
+		close(fd);
 	}
 	else{
 		printf("that command is not recognized\n");
