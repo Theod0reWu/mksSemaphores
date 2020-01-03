@@ -18,6 +18,7 @@
 #include <sys/shm.h>
 #include <sys/ipc.h>
 #include <sys/types.h>
+#include <sys/sem.h>
 
 #define SHM_KEY 12345
 #define SEM_KEY 777
