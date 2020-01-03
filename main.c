@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 
 
     printf("Creating the file\n");
-    int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
+    int fd = fopen("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
     if (fd == -1) {
       printf("Error: %s\n", strerror(errno));
       return -1 ;
@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
     semop(semid, &sb, 1);
 		semctl(semid, 0, IPC_RMID);
 
-    int fd = open("story.txt", O_RDONLY);
+    int fd = fopen("story.txt", O_RDONLY);
     char story[1024];
     read(fd, story, 20479) ;
     printf("Here is the story:\n%s\n", story);
@@ -70,7 +70,7 @@ int main(int argc, char const *argv[])
 	}
 	else if (strcmp(argv[1], "-v") == 0){
 		printf("The story so far:\n");
-    int fd = open("story.txt", O_RDONLY);
+    int fd = fopen("story.txt", O_RDONLY);
     char story[1024];
     read(fd, story, 20479) ;
     printf("Here is the story:\n%s\n", story);
