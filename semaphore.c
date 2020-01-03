@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 	printf("New Line: ");
 	fgets(line, 1024, stdin);
 	int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644) ;
-	write(fd, newLine, 1024);
+	write(fd, line, 1024);
 	close(fd);
 	shmdt(line);
 	sb.sem_op = 1;
