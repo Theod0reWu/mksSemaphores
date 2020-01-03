@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 			printf("%i",errno);
 			return 1;
 	}
-	int * line = shmat(shmid,0,0);
+	char * line = shmat(shmid,0,0);
 	printf("Last Line: %s\n", line);
 	char * newLine;
 	printf("New Line: ");
