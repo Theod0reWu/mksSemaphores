@@ -10,7 +10,7 @@
 #include<unistd.h>
 #include<string.h>
 
-#define SHM_KEY 12345
+#define SHM_KEY 24061
 #define SEM_KEY 777
 
 union semun {
