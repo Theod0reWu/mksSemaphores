@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
 	else if (strcmp(argv[1], "-r") == 0){
 		printf("Removing the shared memory\n");
 		int shmid;
-		shmid = shmget(SHM_KEY, 256 * sizeof(char), 0);
+		shmid = shmget(SHM_KEY, sizeof(char *), IPC_CREAT | 0644);
 		if (shmid == -1){
 			printf("Well that didn't work. uh oh %s \n", strerror(errno));
 			return 1;
