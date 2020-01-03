@@ -21,8 +21,9 @@ int main(int argc, char const *argv[])
 	char * newLine;
 	printf("New Line: ");
 	fgets(newLine, 1024, stdin);
+	strcpy(line, newLine);
 	shmdt(line);
-	int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644) ;
+	int fd = open("story.txt",  O_WRONLY | O_APPEND, 0644) ;
 	write(fd, newLine, 1024);
 	close(fd);
 	sb.sem_op = 1;
