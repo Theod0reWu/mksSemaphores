@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
 	sb.sem_num = 0;
     sb.sem_op = -1;
     sb.sem_flg = SEM_UNDO ;
-  	int sem_opp = semop(semd, &sb, 1);
+  	int sem_opp = semop(semid, &sb, 1);
 
   	int shmid = shmget(SHM_KEY, sizeof (char), 0644);
   	if (shmid == -1){
