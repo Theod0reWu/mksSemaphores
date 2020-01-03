@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
 	printf("Last Line: %s\n", line);
 	printf("New Line: ");
 	fgets(line, 1024, stdin);
-	int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644) ;
+	int fd = open("story.txt", O_WRONLY | O_APPEND, 0644) ;
 	write(fd, line, 1024);
 	close(fd);
 	shmdt(line);
