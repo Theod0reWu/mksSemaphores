@@ -19,4 +19,13 @@
 #include <sys/ipc.h>
 #include <sys/types.h>
 
-#define KEY 12345
+#define SHM_KEY 12345
+#define SEM_KEY 777
+
+union semun {
+               int              val;    /* Value for SETVAL */
+               struct semid_ds *buf;    /* Buffer for IPC_STAT, IPC_SET */
+               unsigned short  *array;  /* Array for GETALL, SETALL */
+               struct seminfo  *__buf;  /* Buffer for IPC_INFO
+                                           (Linux-specific) */
+           };

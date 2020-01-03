@@ -7,14 +7,20 @@ int main(int argc, char const *argv[])
 		return 0;
 	}
 	else if (strcmp(argv[1], "-c") == 0){
-		printf("Creating semaphore\n");
+		printf("Creating shared memory\n");
 		int shmid;
-		shmid = shmget(KEY, 256 * sizeof(char), IPC_CREAT | 0644);
-		printf("%i\n", shmid);
+		shmid = shmget(SHM_KEY, 256 * sizeof(char), IPC_CREAT | 0644);
+		printf("shmid: %i\n", shmid);
 		if (shmid == -1){
 			printf("Well that didn't work. uh oh\n");
 			perror("shared memory");
 			return 1;
+		}
+		printf("Creating the semaphore\n");
+		int semid = semget(SEM_KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
+		printf("semid: %i\n", semid);		
+		if (semid == -1){
+			semid = semget(SEM_KEY, 1, 0);
 		}
 
 	}
@@ -27,6 +33,13 @@ int main(int argc, char const *argv[])
 			return 1;
 		}
 		shmctl(shmid, IPC_RMID, 0);
+
+		printf("Remvoing the semaphore\n");
+		int semid = semget(SEM_KEY, 1, 0);
+		if (semid == -1){
+			printf("Uh oh I couldn't get the semaphore\n");
+		}
+		semctl(semid, 0, IPC_RMID);
 	}
 	else if (strcmp(argv[1], "-v") == 0){
 		printf("The story so far:\n");
