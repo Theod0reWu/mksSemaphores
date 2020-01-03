@@ -69,7 +69,6 @@ int main(int argc, char const *argv[])
     }
 	}
 	else if (strcmp(argv[1], "-v") == 0){
-		printf("The story so far:\n");
     int fd = open("story.txt", O_RDONLY);
     char story[1024];
     read(fd, story, 20479) ;

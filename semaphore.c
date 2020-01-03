@@ -18,13 +18,12 @@ int main(int argc, char const *argv[])
 	}
 	int * line = shmat(shmid,0,0);
 	printf("Last Line: %s\n", line);
-	char * newLine;
 	printf("New Line: ");
-	fgets(newLine, 1024, stdin);
-	shmdt(line);
+	fgets(line, 1024, stdin);
 	int fd = open("story.txt", O_CREAT | O_TRUNC | O_RDWR, 0644) ;
 	write(fd, newLine, 1024);
 	close(fd);
+	shmdt(line);
 	sb.sem_op = 1;
 	semop(semid, &sb, 1);
 
