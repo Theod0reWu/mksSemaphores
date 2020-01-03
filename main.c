@@ -54,14 +54,14 @@ int main(int argc, char const *argv[])
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
-    semop(semd, &sb, 1);
+    semop(semid, &sb, 1);
 		semctl(semid, 0, IPC_RMID);
 
     int fd = open("story.txt", O_RDONLY);
     char story[1024];
     read(fd, story, 20479) ;
     printf("Here is the story:\n%s\n", story);
-    if (remove(fd) == 0){
+    if (remove("story.txt") == 0){
       printf("File Deleted\n");
     }
     else{
