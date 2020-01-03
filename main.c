@@ -1,15 +1,7 @@
 #include "main.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<errno.h>
-#include<string.h>
-#include<fcntl.h>
-#include<unistd.h>
-#include<sys/types.h>
-#include<sys/ipc.h>
-#include<sys/sem.h>
-#include<sys/shm.h>
-#include<sys/stat.h>
+       #include <sys/types.h>
+       #include <sys/stat.h>
+       #include <fcntl.h>
 
 int main(int argc, char const *argv[])
 {
