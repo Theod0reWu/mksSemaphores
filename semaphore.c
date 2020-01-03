@@ -1,3 +1,5 @@
+#include "main.h"
+
 int main(int argc, char const *argv[])
 {
 	int semid = semget(SEM_KEY, 1, 0);
