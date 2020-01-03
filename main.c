@@ -57,10 +57,13 @@ int main(int argc, char const *argv[])
     semop(semid, &sb, 1);
 		semctl(semid, 0, IPC_RMID);
 
-    int fd = open("story.txt", O_RDONLY);
-    char story[1024];
-    read(fd, story, 20479) ;
-    printf("Here is the story:\n%s\n", story);
+		int fd = open("story.txt", O_RDONLY);
+		struct stat st;
+		stat("story.txt", &st);
+    char story[st.st_size];
+    read(fd, story, sizeof(char)*st.st_size) ;
+		story[st.st_size] = '\0';
+    printf("Here is the story:    \n%s  \n", story);
 		close(fd);
     if (remove("story.txt") == 0){
       printf("File Deleted\n");
@@ -71,8 +74,16 @@ int main(int argc, char const *argv[])
 	}
 	else if (strcmp(argv[1], "-v") == 0){
     int fd = open("story.txt", O_RDONLY);
-    char story[1024];
-    read(fd, story, sizeof(char)*512) ;
+
+		struct stat st;
+		stat("story.txt", &st);
+
+
+    char story[st.st_size];
+
+		//printf("%li\n", st.st_size);
+    read(fd, story, sizeof(char)*st.st_size) ;
+		story[st.st_size] = '\0';
     printf("Here is the story:    \n%s  \n", story);
 		close(fd);
 	}
