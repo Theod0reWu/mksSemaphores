@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 		printf("shmid: %i\n", shmid);
 		if (shmid == -1){
 			printf("Well that didn't work. uh oh\n");
-			printf(strerror(errno));
+			printf("%s\n",strerror(errno));
 			printf("%i",errno);
 			return 1;
 		}
@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 		}
     union semun us;
     us.val = 1;
-    r = semctl(semid, 0 , SETVAL, us);
+    semctl(semid, 0 , SETVAL, us);
 
 
     printf("Creating the file\n");
@@ -46,11 +46,15 @@ int main(int argc, char const *argv[])
 		}
 		shmctl(shmid, IPC_RMID, 0);
 
-		printf("Removeing the semaphore\n");
+		printf("Removing the semaphore\n");
 		int semid = semget(SEM_KEY, 1, 0);
 		if (semid == -1){
 			printf("Uh oh I couldn't get the semaphore\n");
 		}
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = -1;
+    semop(semd, &sb, 1);
 		semctl(semid, 0, IPC_RMID);
 
     int fd = open("story.txt", O_RDONLY);

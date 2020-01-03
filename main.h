@@ -1,14 +1,15 @@
 
 #include<stdio.h>
-#include<sys/ipc.h>
-#include<sys/shm.h>
-#include<sys/types.h>
-#include<sys/sem.h>
-#include<string.h>
-#include<errno.h>
 #include<stdlib.h>
-#include<unistd.h>
+#include<errno.h>
 #include<string.h>
+#include<fcntl.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/ipc.h>
+#include<sys/sem.h>
+#include<sys/shm.h>
+#include<sys/stat.h>
 
 #define SHM_KEY 24061
 #define SEM_KEY 777

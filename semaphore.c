@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
   	int shmid = shmget(SHM_KEY, sizeof (char), 0644);
   	if (shmid == -1){
 			printf("Well that didn't work. uh oh\n");
-			printf(strerror(errno));
+			printf("%s\n",strerror(errno));
 			printf("%i",errno);
 			return 1;
 	}
