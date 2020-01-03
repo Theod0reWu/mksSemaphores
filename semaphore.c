@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
 	write(fd, newLine, 1024);
 	close(fd);
 	sb.sem_op = 1;
-	semop(semd, &sb, 1);
+	semop(semid, &sb, 1);
 
 
 	return 0;
